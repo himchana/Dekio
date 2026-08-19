@@ -400,9 +400,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-**Project Lead:** SAMEER
+**Project Lead:** Sameer Mutabuzi
 
-**Email:** himchana@example.com
+**Email:** kalebuchana@gmail.com
 
 **Repository:** [github.com/himchana/dekio](https://github.com/himchana/dekio)
 
