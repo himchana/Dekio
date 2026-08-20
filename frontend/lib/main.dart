@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'core/routes.dart';
+import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/register_screen.dart';
+import 'screens/services_screen.dart';
+
 void main() {
   runApp(const DekioApp());
 }
@@ -12,9 +18,15 @@ class DekioApp extends StatelessWidget {
     return MaterialApp(
       title: 'DEKIO',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: const SizedBox.expand(),
-      ),
+
+      initialRoute: AppRoutes.home,
+
+      routes: {
+        AppRoutes.home: (context) => const HomeScreen(),
+        AppRoutes.login: (context) => const LoginScreen(),
+        AppRoutes.register: (context) => const RegisterScreen(),
+        AppRoutes.services: (context) => const ServicesScreen(),
+      },
     );
   }
 }
