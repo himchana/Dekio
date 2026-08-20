@@ -1,5 +1,4 @@
 # DEKIO
-
 > A digital platform connecting customers with trusted cleaning-service providers for homes, offices, and businesses.
 
 <div align="center">
@@ -367,6 +366,8 @@ DEKIO may later include:
 
 ---
 
+
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -375,18 +376,28 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-**Project Lead:** SAMEER
+**Project Lead:** Sameer Mutabuzi
 
-**Email:** himchana@example.com
+**Email:** kalebuchana@gmail.com
 
 **Repository:** [github.com/himchana/dekio](https://github.com/himchana/dekio)
 
 ---
 
-**DEKIO — Discover. Book. Clean.**
-
-Built with by the DEKIO Team
 
 **MEMBERS**
 * Kalebu Chana
 * Omari Sengulo
+
+  <h2 align="center">
+  DEKIO
+  <br>
+  <span style="color: rgba(107, 114, 128, 0.5);">|</span>
+  <span style="color: #ffffff;">Discover</span>
+  <span style="color: rgba(107, 114, 128, 0.5);">|</span>
+  <span style="color: #ffffff;">Book</span>
+  <span style="color: rgba(107, 114, 128, 0.5);">|</span>
+  <span style="color: #ffffff;">Clean</span>
+</h2>
+
+<h3 align="center"> Built by the DEKIO Team </h3>
