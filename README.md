@@ -367,29 +367,6 @@ DEKIO may later include:
 ---
 
 
----
-
-## Contributing
-
-Contributions make this project more impactful. Here's how to get involved:
-
-1. Fork the project
-2. Create your feature branch
-   ```bash
-   git checkout -b feature/Feature-Name
-   ```
-3. Commit your changes
-   ```bash
-   git commit -m 'Add Feature-Name'
-   ```
-4. Push to the branch
-   ```bash
-   git push origin feature/Feature-Name
-   ```
-5. Open a Pull Request
-
----
-
 
 ## License
 
