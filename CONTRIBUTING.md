@@ -5,7 +5,7 @@ Thanks for your interest in contributing! Please follow these steps.
 ## Branching Strategy
 
 - `main` — stable, production-ready code only
-- `develop` — active integration branch; all feature work merges here first
+- `development` — active integration branch; all feature work merges here first
 
 ## Workflow
 
