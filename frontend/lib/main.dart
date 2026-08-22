@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/routes.dart';
+import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -19,9 +20,10 @@ class DekioApp extends StatelessWidget {
       title: 'DEKIO',
       debugShowCheckedModeBanner: false,
 
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.splash,
 
       routes: {
+        AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.home: (context) => const HomeScreen(),
         AppRoutes.login: (context) => const LoginScreen(),
         AppRoutes.register: (context) => const RegisterScreen(),
