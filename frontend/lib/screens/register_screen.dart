@@ -1,143 +1,92 @@
 import 'package:flutter/material.dart';
+import '../core/app_colors.dart';
 import '../core/routes.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
-  static const Color mintWhite = Color(0xFFF0FAF8);
-  static const Color inkNavy = Color(0xFF0F172A);
-  static const Color buttonTeal = Color(0xFF0E7C71);
-  static const Color deepTeal = Color(0xFF0B6E63);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mintWhite,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        foregroundColor: inkNavy,
+        foregroundColor: AppColors.inkNavy,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
-
             const Text(
               'Create account',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: inkNavy,
+                color: AppColors.inkNavy,
+                letterSpacing: -0.5,
               ),
             ),
-
-            const SizedBox(height: 8),
-
+            const SizedBox(height: 6),
             const Text(
-              'Join DEKIO and discover services around you.',
+              'Join DEKIO to book certified service pros.',
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
+                fontSize: 14,
+                color: AppColors.slateMuted,
               ),
             ),
+            const SizedBox(height: 28),
 
-            const SizedBox(height: 30),
-
-            _inputField(
-              label: 'Full Name',
-              icon: Icons.person_outline,
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Full Name',
+                prefixIcon: Icon(Icons.person_outline, color: AppColors.primaryBlue),
+              ),
             ),
-
             const SizedBox(height: 16),
 
-            _inputField(
-              label: 'Email',
-              icon: Icons.email_outlined,
+            const TextField(
               keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                prefixIcon: Icon(Icons.email_outlined, color: AppColors.primaryBlue),
+              ),
             ),
-
             const SizedBox(height: 16),
 
-            _inputField(
-              label: 'Password',
-              icon: Icons.lock_outline,
+            const TextField(
               obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                prefixIcon: Icon(Icons.lock_outline, color: AppColors.primaryBlue),
+              ),
             ),
-
-            const SizedBox(height: 26),
+            const SizedBox(height: 28),
 
             SizedBox(
               width: double.infinity,
-              height: 54,
+              height: 52,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(
-                    context,
-                    AppRoutes.home,
-                  );
-                },
+                onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.home),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonTeal,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
+                  backgroundColor: AppColors.primaryBlue,
                 ),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: const Text('Register', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ),
             ),
 
-            const SizedBox(height: 16),
-
+            const SizedBox(height: 18),
             Center(
               child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    AppRoutes.login,
-                  );
-                },
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
                 child: const Text(
                   'Already have an account? Login',
-                  style: TextStyle(
-                    color: deepTeal,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(color: AppColors.primaryBlue, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _inputField({
-    required String label,
-    required IconData icon,
-    bool obscureText = false,
-    TextInputType? keyboardType,
-  }) {
-    return TextField(
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon),
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
         ),
       ),
     );

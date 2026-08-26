@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import '../core/app_colors.dart';
 import '../core/routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  static const Color deepTeal = Color(0xFF0B6E63);
-  static const Color brightTeal = Color(0xFF17A398);
-  static const Color mintWhite = Color(0xFFF0FAF8);
-  static const Color inkNavy = Color(0xFF0F172A);
-  static const Color buttonTeal = Color(0xFF0E7C71);
-  static const Color goldenAccent = Color(0xFFF5B942);
 
   @override
   Widget build(BuildContext context) {
@@ -18,237 +12,183 @@ class HomeScreen extends StatelessWidget {
         final bool isLargeScreen = constraints.maxWidth >= 800;
 
         return Scaffold(
-          backgroundColor: mintWhite,
-
+          backgroundColor: AppColors.background,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            foregroundColor: inkNavy,
-            elevation: 1,
-
-            // Hamburger only appears on small screens.
+            foregroundColor: AppColors.inkNavy,
+            elevation: 0.5,
             automaticallyImplyLeading: !isLargeScreen,
-
-            title: const Text(
-              'DEKIO',
-              style: TextStyle(
-                color: deepTeal,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            title: Row(
+              children: [
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    gradient: AppColors.brandGradient,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: const Icon(Icons.auto_awesome,
+                      color: Colors.white, size: 18),
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  'DEKIO',
+                  style: TextStyle(
+                    color: AppColors.primaryBlue,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
             ),
-
             actions: isLargeScreen
                 ? [
                     _navButton(
-                      context,
-                      'Home',
-                      Icons.home_outlined,
-                      AppRoutes.home,
-                    ),
-                    _navButton(
-                      context,
-                      'Services',
-                      Icons.miscellaneous_services_outlined,
-                      AppRoutes.services,
-                    ),
-                    _navButton(
-                      context,
-                      'Login',
-                      Icons.login,
-                      AppRoutes.login,
-                    ),
-                    _navButton(
-                      context,
-                      'Register',
-                      Icons.person_add_outlined,
-                      AppRoutes.register,
-                    ),
-                    _navButton(
-                      context,
-                      'Settings',
-                      Icons.settings_outlined,
-                      AppRoutes.settings,
-                    ),
+                        context, 'Home', Icons.home_outlined, AppRoutes.home),
+                    _navButton(context, 'Services', Icons.grid_view_rounded,
+                        AppRoutes.services),
+                    _navButton(context, 'Login', Icons.login, AppRoutes.login),
+                    _navButton(context, 'Register', Icons.person_add_outlined,
+                        AppRoutes.register),
+                    _navButton(context, 'Settings', Icons.settings_outlined,
+                        AppRoutes.settings),
                     const SizedBox(width: 12),
                   ]
                 : null,
           ),
-
-          drawer: isLargeScreen
-              ? null
-              : Drawer(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      const DrawerHeader(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              deepTeal,
-                              brightTeal,
-                            ],
-                          ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            'DEKIO',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      _drawerItem(
-                        context,
-                        'Home',
-                        Icons.home_outlined,
-                        AppRoutes.home,
-                      ),
-
-                      _drawerItem(
-                        context,
-                        'Services',
-                        Icons.miscellaneous_services_outlined,
-                        AppRoutes.services,
-                      ),
-
-                      _drawerItem(
-                        context,
-                        'Login',
-                        Icons.login,
-                        AppRoutes.login,
-                      ),
-
-                      _drawerItem(
-                        context,
-                        'Register',
-                        Icons.person_add_outlined,
-                        AppRoutes.register,
-                      ),
-
-                      _drawerItem(
-                        context,
-                        'Settings',
-                        Icons.settings_outlined,
-                        AppRoutes.settings,
-                      ),
-
-                      const Divider(),
-
-                      ListTile(
-                        leading: const Icon(
-                          Icons.logout,
-                          color: Colors.redAccent,
-                        ),
-                        title: const Text('Logout'),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-
+          drawer: isLargeScreen ? null : _buildDrawer(context),
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 900,
-                ),
+                constraints: const BoxConstraints(maxWidth: 860),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.handyman_outlined,
-                      size: 70,
-                      color: deepTeal,
+                    // Brand Icon
+                    Container(
+                      width: 88,
+                      height: 88,
+                      decoration: BoxDecoration(
+                        gradient: AppColors.brandGradient,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primaryBlue.withOpacity(0.25),
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.handyman_rounded,
+                        size: 44,
+                        color: Colors.white,
+                      ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 22),
 
                     const Text(
                       'Welcome to DEKIO',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 32,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        color: inkNavy,
+                        color: AppColors.inkNavy,
+                        letterSpacing: -0.5,
                       ),
                     ),
 
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
 
                     const Text(
-                      'Discover trusted services around you.',
+                      'High-resolution fixed scenario photos with fast disk caching.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 17,
-                        color: Colors.black54,
+                        fontSize: 15,
+                        color: AppColors.slateMuted,
                       ),
                     ),
 
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 28),
 
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRoutes.services,
-                        );
-                      },
+                    // Explore Services Button
+                    ElevatedButton.icon(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, AppRoutes.services),
+                      icon: const Icon(Icons.search, size: 20),
+                      label: const Text(
+                        'Browse All Services',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonTeal,
+                        backgroundColor: AppColors.primaryBlue,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 16,
-                        ),
+                            horizontal: 32, vertical: 16),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text(
-                        'Browse Services',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            borderRadius: BorderRadius.circular(16)),
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 24),
 
+                    // Brand Feature Highlights Banner
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: goldenAccent.withValues(alpha: 0.4),
-                        ),
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: goldenAccent,
-                            size: 30,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.borderLight),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.02),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
                           ),
-                          SizedBox(width: 14),
-                          Expanded(
-                            child: Text(
-                              'Find the right service provider for your needs.',
-                              style: TextStyle(
-                                color: inkNavy,
-                                fontSize: 15,
-                              ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: AppColors.accentOrange.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(Icons.verified_rounded,
+                                color: AppColors.accentOrange, size: 24),
+                          ),
+                          const SizedBox(width: 14),
+                          const Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'AI & Signal Processing Hub Certified',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.inkNavy,
+                                  ),
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  'Fixed Unsplash resolution (w=400, q=80) for instant loading.',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.slateMuted,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          const Icon(Icons.arrow_forward_ios_rounded,
+                              size: 15, color: AppColors.slateMuted),
                         ],
                       ),
                     ),
@@ -262,50 +202,72 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  static Widget _navButton(
-    BuildContext context,
-    String title,
-    IconData icon,
-    String route,
-  ) {
-    return TextButton.icon(
-      onPressed: () {
-        if (route == AppRoutes.home) {
-          return;
-        }
-
-        Navigator.pushNamed(context, route);
-      },
-      icon: Icon(
-        icon,
-        size: 19,
-        color: deepTeal,
-      ),
-      label: Text(
-        title,
-        style: const TextStyle(
-          color: inkNavy,
-          fontWeight: FontWeight.w600,
-        ),
+  static Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: AppColors.brandGradient,
+            ),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Icon(Icons.auto_awesome, color: Colors.white, size: 34),
+                  SizedBox(height: 8),
+                  Text(
+                    'DEKIO • AI HUB',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          _drawerItem(context, 'Home', Icons.home_outlined, AppRoutes.home),
+          _drawerItem(
+              context, 'Services', Icons.grid_view_rounded, AppRoutes.services),
+          _drawerItem(context, 'Login', Icons.login, AppRoutes.login),
+          _drawerItem(context, 'Register', Icons.person_add_outlined,
+              AppRoutes.register),
+          _drawerItem(
+              context, 'Settings', Icons.settings_outlined, AppRoutes.settings),
+        ],
       ),
     );
   }
 
+  static Widget _navButton(
+      BuildContext context, String title, IconData icon, String route) {
+    return TextButton.icon(
+      onPressed: () {
+        if (route != AppRoutes.home) {
+          Navigator.pushNamed(context, route);
+        }
+      },
+      icon: Icon(icon, size: 18, color: AppColors.primaryBlue),
+      label: Text(title,
+          style: const TextStyle(
+              color: AppColors.inkNavy, fontWeight: FontWeight.w600)),
+    );
+  }
+
   static Widget _drawerItem(
-    BuildContext context,
-    String title,
-    IconData icon,
-    String route,
-  ) {
+      BuildContext context, String title, IconData icon, String route) {
     return ListTile(
-      leading: Icon(
-        icon,
-        color: deepTeal,
-      ),
-      title: Text(title),
+      leading: Icon(icon, color: AppColors.primaryBlue),
+      title: Text(title,
+          style: const TextStyle(
+              fontWeight: FontWeight.w600, color: AppColors.inkNavy)),
       onTap: () {
         Navigator.pop(context);
-
         if (route != AppRoutes.home) {
           Navigator.pushNamed(context, route);
         }
