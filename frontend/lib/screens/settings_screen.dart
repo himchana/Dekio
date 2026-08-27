@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import '../core/app_colors.dart';
-import '../core/routes.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -41,7 +41,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             icon: Icons.notifications_outlined,
             value: _notifications,
             accentColor: AppColors.primaryBlue,
-            onChanged: (val) => setState(() => _notifications = val),
+            onChanged: (val) {
+              setState(() => _notifications = val);
+            },
           ),
           _buildSwitchTile(
             title: 'Location Services',
@@ -49,7 +51,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             icon: Icons.location_on_outlined,
             value: _locationServices,
             accentColor: AppColors.accentOrange,
-            onChanged: (val) => setState(() => _locationServices = val),
+            onChanged: (val) {
+              setState(() => _locationServices = val);
+            },
           ),
           _buildSwitchTile(
             title: 'Dark Mode',
@@ -57,9 +61,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             icon: Icons.dark_mode_outlined,
             value: _darkMode,
             accentColor: AppColors.accentPink,
-            onChanged: (val) => setState(() => _darkMode = val),
+            onChanged: (val) {
+              setState(() => _darkMode = val);
+            },
           ),
-
           const SizedBox(height: 24),
           _buildSectionHeader('Account & Support'),
           _buildActionTile(
@@ -80,12 +85,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             iconColor: AppColors.accentPink,
             onTap: () {},
           ),
-
           const SizedBox(height: 32),
           Center(
             child: Column(
               children: [
-                // Signature 3-Color Brand Gradient Bar
                 Container(
                   width: 48,
                   height: 4,
@@ -139,17 +142,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.borderLight),
+        border: Border.all(
+          color: AppColors.borderLight,
+        ),
       ),
       child: SwitchListTile(
         secondary: Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: accentColor.withOpacity(0.12),
+            color: accentColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: accentColor, size: 22),
+          child: Icon(
+            icon,
+            color: accentColor,
+            size: 22,
+          ),
         ),
         title: Text(
           title,
@@ -161,9 +170,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(fontSize: 12, color: AppColors.slateMuted),
+          style: const TextStyle(
+            fontSize: 12,
+            color: AppColors.slateMuted,
+          ),
         ),
-        activeColor: accentColor,
+        activeThumbColor: accentColor,
         value: value,
         onChanged: onChanged,
       ),
@@ -181,18 +193,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.borderLight),
+        border: Border.all(
+          color: AppColors.borderLight,
+        ),
       ),
       child: ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
         leading: Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: iconColor.withOpacity(0.12),
+            color: iconColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: iconColor, size: 22),
+          child: Icon(
+            icon,
+            color: iconColor,
+            size: 22,
+          ),
         ),
         title: Text(
           title,
@@ -202,7 +222,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             color: AppColors.inkNavy,
           ),
         ),
-        trailing: const Icon(Icons.chevron_right, color: Colors.black38),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: Colors.black38,
+        ),
         onTap: onTap,
       ),
     );
