@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'core/app_colors.dart';
 import 'core/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Set transparent status bar with dark icons
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -55,7 +55,10 @@ class DekioApp extends StatelessWidget {
             backgroundColor: AppColors.primaryBlue,
             foregroundColor: Colors.white,
             elevation: 0,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 14,
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -68,18 +71,28 @@ class DekioApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: AppColors.borderLight),
+            borderSide: const BorderSide(
+              color: AppColors.borderLight,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: AppColors.borderLight),
+            borderSide: const BorderSide(
+              color: AppColors.borderLight,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: AppColors.primaryBlue, width: 1.8),
+            borderSide: const BorderSide(
+              color: AppColors.primaryBlue,
+              width: 1.8,
+            ),
           ),
         ),
       ),
