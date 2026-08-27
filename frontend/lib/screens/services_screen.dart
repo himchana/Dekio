@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../core/app_colors.dart';
+import '../core/routes.dart';
 import '../models/service_model.dart';
 
 class ServicesScreen extends StatelessWidget {
@@ -56,35 +58,25 @@ class ServicesScreen extends StatelessWidget {
   static const Color orangeGold = Color(0xFFF4A261);
   static const Color background = Color(0xFFF8F9FC);
 
-  void _selectService(BuildContext context, Service service) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: darkNavy,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        content: Row(
-          children: [
-            const Icon(
-              Icons.check_circle_rounded,
-              color: orangeGold,
-              size: 20,
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                '${service.name} details coming soon',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-        duration: const Duration(seconds: 2),
-      ),
+  // ==========================================================
+  // SELECT SERVICE
+  // ==========================================================
+
+  void _selectService(
+    BuildContext context,
+    Service service,
+  ) {
+    Navigator.pushNamed(
+      context,
+      AppRoutes.serviceDetails,
+      arguments: {
+        'serviceName': service.name,
+        'description': service.description,
+        'price': 'TSh ${service.price.toInt()}',
+        'duration': '1–3 hours',
+        'icon': Icons.cleaning_services_rounded,
+        'serviceColor': AppColors.primaryBlue,
+      },
     );
   }
 
@@ -95,7 +87,10 @@ class ServicesScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
+            // ==================================================
+            // HEADER
+            // ==================================================
+
             Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 18,
@@ -135,7 +130,8 @@ class ServicesScreen extends StatelessWidget {
                   const SizedBox(width: 14),
 
                   const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Choose service',
@@ -160,12 +156,16 @@ class ServicesScreen extends StatelessWidget {
               ),
             ),
 
-            // Services Grid
+            // ==================================================
+            // SERVICES GRID
+            // ==================================================
+
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(18),
                 child: GridView.builder(
-                  physics: const BouncingScrollPhysics(),
+                  physics:
+                      const BouncingScrollPhysics(),
                   itemCount: services.length,
                   gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -180,7 +180,10 @@ class ServicesScreen extends StatelessWidget {
                     return _ServiceCard(
                       service: service,
                       onTap: () {
-                        _selectService(context, service);
+                        _selectService(
+                          context,
+                          service,
+                        );
                       },
                     );
                   },
@@ -194,6 +197,10 @@ class ServicesScreen extends StatelessWidget {
   }
 }
 
+// ============================================================
+// SERVICE CARD
+// ============================================================
+
 class _ServiceCard extends StatelessWidget {
   final Service service;
   final VoidCallback onTap;
@@ -203,9 +210,14 @@ class _ServiceCard extends StatelessWidget {
     required this.onTap,
   });
 
-  static const Color primaryPink = Color(0xFFD81B60);
-  static const Color darkNavy = Color(0xFF0B1026);
-  static const Color orangeGold = Color(0xFFF4A261);
+  static const Color primaryPink =
+      Color(0xFFD81B60);
+
+  static const Color darkNavy =
+      Color(0xFF0B1026);
+
+  static const Color orangeGold =
+      Color(0xFFF4A261);
 
   @override
   Widget build(BuildContext context) {
@@ -213,42 +225,57 @@ class _ServiceCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius:
+            BorderRadius.circular(24),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius:
+                BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
+                color: Colors.black.withValues(
+                  alpha: 0.08,
+                ),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius:
+                BorderRadius.circular(24),
             child: Stack(
               fit: StackFit.expand,
               children: [
-                // Service image
+                // ==================================================
+                // SERVICE IMAGE
+                // ==================================================
+
                 CachedNetworkImage(
                   imageUrl: service.imageUrl,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) {
+                  placeholder:
+                      (context, url) {
                     return Shimmer.fromColors(
-                      baseColor: const Color(0xFFE2E8F0),
-                      highlightColor: const Color(0xFFF8FAFC),
+                      baseColor:
+                          const Color(0xFFE2E8F0),
+                      highlightColor:
+                          const Color(0xFFF8FAFC),
                       child: Container(
-                        color: const Color(0xFFCBD5E1),
+                        color:
+                            const Color(0xFFCBD5E1),
                       ),
                     );
                   },
-                  errorWidget: (context, url, error) {
+                  errorWidget:
+                      (context, url, error) {
                     return Container(
-                      color: const Color(0xFFF1F5F9),
+                      color:
+                          const Color(0xFFF1F5F9),
                       child: const Center(
                         child: Icon(
-                          Icons.cleaning_services_outlined,
+                          Icons
+                              .cleaning_services_outlined,
                           color: primaryPink,
                           size: 34,
                         ),
@@ -257,64 +284,95 @@ class _ServiceCard extends StatelessWidget {
                   },
                 ),
 
-                // Dark gradient for text readability
+                // ==================================================
+                // DARK GRADIENT
+                // ==================================================
+
                 Positioned.fill(
                   child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: const [0.0, 0.45, 1.0],
+                    decoration:
+                        BoxDecoration(
+                      gradient:
+                          LinearGradient(
+                        begin:
+                            Alignment.topCenter,
+                        end:
+                            Alignment.bottomCenter,
+                        stops: const [
+                          0.0,
+                          0.45,
+                          1.0,
+                        ],
                         colors: [
-                          Colors.black.withValues(alpha: 0.20),
+                          Colors.black.withValues(
+                            alpha: 0.20,
+                          ),
                           Colors.transparent,
-                          Colors.black.withValues(alpha: 0.88),
+                          Colors.black.withValues(
+                            alpha: 0.88,
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
 
-                // Service badge
+                // ==================================================
+                // DEKIO BADGE
+                // ==================================================
+
                 Positioned(
                   top: 10,
                   left: 10,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
+                    padding:
+                        const EdgeInsets.symmetric(
                       horizontal: 8,
                       vertical: 4,
                     ),
-                    decoration: BoxDecoration(
-                      color: primaryPink.withValues(alpha: 0.92),
-                      borderRadius: BorderRadius.circular(8),
+                    decoration:
+                        BoxDecoration(
+                      color: primaryPink
+                          .withValues(alpha: 0.92),
+                      borderRadius:
+                          BorderRadius.circular(8),
                     ),
                     child: const Text(
                       'DEKIO',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 10,
-                        fontWeight: FontWeight.bold,
+                        fontWeight:
+                            FontWeight.bold,
                         letterSpacing: 0.3,
                       ),
                     ),
                   ),
                 ),
 
-                // Rating
+                // ==================================================
+                // RATING
+                // ==================================================
+
                 Positioned(
                   top: 10,
                   right: 10,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
+                    padding:
+                        const EdgeInsets.symmetric(
                       horizontal: 7,
                       vertical: 4,
                     ),
-                    decoration: BoxDecoration(
-                      color: darkNavy.withValues(alpha: 0.65),
-                      borderRadius: BorderRadius.circular(8),
+                    decoration:
+                        BoxDecoration(
+                      color: darkNavy
+                          .withValues(alpha: 0.65),
+                      borderRadius:
+                          BorderRadius.circular(8),
                     ),
                     child: const Row(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize:
+                          MainAxisSize.min,
                       children: [
                         Icon(
                           Icons.star_rounded,
@@ -327,7 +385,8 @@ class _ServiceCard extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.5,
-                            fontWeight: FontWeight.bold,
+                            fontWeight:
+                                FontWeight.bold,
                           ),
                         ),
                       ],
@@ -335,28 +394,38 @@ class _ServiceCard extends StatelessWidget {
                   ),
                 ),
 
-                // Service information
+                // ==================================================
+                // SERVICE INFORMATION
+                // ==================================================
+
                 Positioned(
                   left: 12,
                   right: 12,
                   bottom: 12,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                    mainAxisSize:
+                        MainAxisSize.min,
                     children: [
                       Text(
                         service.name,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        overflow:
+                            TextOverflow.ellipsis,
+                        style:
+                            const TextStyle(
                           color: Colors.white,
                           fontSize: 14.5,
-                          fontWeight: FontWeight.bold,
+                          fontWeight:
+                              FontWeight.bold,
                           shadows: [
                             Shadow(
-                              color: Colors.black45,
+                              color:
+                                  Colors.black45,
                               blurRadius: 4,
-                              offset: Offset(0, 1),
+                              offset:
+                                  Offset(0, 1),
                             ),
                           ],
                         ),
@@ -367,9 +436,13 @@ class _ServiceCard extends StatelessWidget {
                       Text(
                         service.description,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        overflow:
+                            TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.88),
+                          color: Colors.white
+                              .withValues(
+                            alpha: 0.88,
+                          ),
                           fontSize: 11,
                         ),
                       ),
@@ -377,39 +450,59 @@ class _ServiceCard extends StatelessWidget {
                       const SizedBox(height: 8),
 
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                            MainAxisAlignment
+                                .spaceBetween,
                         children: [
-                          // Price
+                          // ==================================================
+                          // PRICE
+                          // ==================================================
+
                           Container(
-                            padding: const EdgeInsets.symmetric(
+                            padding:
+                                const EdgeInsets
+                                    .symmetric(
                               horizontal: 8,
                               vertical: 4,
                             ),
-                            decoration: BoxDecoration(
+                            decoration:
+                                BoxDecoration(
                               color: orangeGold,
-                              borderRadius: BorderRadius.circular(7),
+                              borderRadius:
+                                  BorderRadius
+                                      .circular(7),
                             ),
                             child: Text(
                               'TSh ${service.price.toInt()}',
-                              style: const TextStyle(
+                              style:
+                                  const TextStyle(
                                 color: darkNavy,
                                 fontSize: 10.5,
-                                fontWeight: FontWeight.bold,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
                               ),
                             ),
                           ),
 
-                          // Arrow
+                          // ==================================================
+                          // ARROW
+                          // ==================================================
+
                           Container(
                             width: 28,
                             height: 28,
-                            decoration: const BoxDecoration(
+                            decoration:
+                                const BoxDecoration(
                               color: primaryPink,
-                              shape: BoxShape.circle,
+                              shape:
+                                  BoxShape.circle,
                             ),
                             child: const Icon(
-                              Icons.arrow_forward_rounded,
-                              color: Colors.white,
+                              Icons
+                                  .arrow_forward_rounded,
+                              color:
+                                  Colors.white,
                               size: 15,
                             ),
                           ),
