@@ -1,5 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+import '../core/app_colors.dart';
 import '../core/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,25 +12,32 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
 
   @override
   void initState() {
     super.initState();
+
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
-    _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeIn);
+
+    _fadeAnim = CurvedAnimation(
+      parent: _animController,
+      curve: Curves.easeIn,
+    );
+
     _animController.forward();
 
     Timer(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.pushReplacementNamed(
           context,
-          AppRoutes.home,
+          AppRoutes.roleSelection,
         );
       }
     });
@@ -42,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0FAF8),
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Center(
           child: FadeTransition(
@@ -50,16 +60,21 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo Mark
+                // ==================================================
+                // DEKIO LOGO
+                // ==================================================
+
                 Container(
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0B6E63),
+                    color: AppColors.primaryBlue,
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF0B6E63).withValues(alpha: 0.3),
+                        color: AppColors.primaryBlue.withValues(
+                          alpha: 0.30,
+                        ),
                         blurRadius: 20,
                         offset: const Offset(0, 8),
                       ),
@@ -74,24 +89,32 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
                 const SizedBox(height: 24),
 
+                // ==================================================
+                // APP NAME
+                // ==================================================
+
                 const Text(
                   'DEKIO',
                   style: TextStyle(
                     fontSize: 38,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
-                    color: Color(0xFF0B6E63),
+                    color: AppColors.primaryBlue,
                   ),
                 ),
 
                 const SizedBox(height: 8),
+
+                // ==================================================
+                // WELCOME TEXT
+                // ==================================================
 
                 const Text(
                   'Welcome to DEKIO',
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF0F172A),
+                    color: AppColors.inkNavy,
                   ),
                 ),
 
@@ -99,6 +122,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
                 const Text(
                   'Discover trusted services around you',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black54,
@@ -107,12 +131,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
                 const SizedBox(height: 42),
 
+                // ==================================================
+                // LOADING
+                // ==================================================
+
                 const SizedBox(
                   width: 32,
                   height: 32,
                   child: CircularProgressIndicator(
                     strokeWidth: 3,
-                    color: Color(0xFF0E7C71),
+                    color: AppColors.primaryBlue,
                   ),
                 ),
               ],
